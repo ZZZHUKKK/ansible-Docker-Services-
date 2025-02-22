@@ -1,0 +1,33 @@
+---
+rmqdefault:
+  - key: AMQP_EXCHANGE
+    value: xchg_integrations
+  - key: AMQP_USER
+    value: "{{ rmq.user }}"
+  - key: AMQP_PASSWORD
+    value: "{{ rmq.password }}"
+  - key: AMQP_HOSTNAME
+    value: rmq
+
+registry: "localhost:5000/"
+
+services:
+  - name: api
+    version: latest
+  - name: app
+    version: latest
+  - name: converter
+    version: latest
+  - name: rmq
+    version: latest
+
+  
+
+non_build_serv:
+  - name: rmq
+    version: latest
+
+
+configs:
+  converter:
+    queue: q_imageProcessor

@@ -1,0 +1,10 @@
+[deploy]
+STEPIKserver1 ansible_host=192.168.1.66 ansible_user=vagrant ansible_port=2223
+
+[managers]
+STEPIKserver2 ansible_host=192.168.1.66 ansible_user=vagrant ansible_port=2224
+STEPIKserver3 ansible_host=192.168.1.66 ansible_user=vagrant ansible_port=2225
+
+[workers]
+STEPIKserver4 ansible_host=192.168.1.66 ansible_user=vagrant ansible_port=2226
+STEPIKserver5 ansible_host=192.168.1.66 ansible_user=vagrant ansible_port=2227

@@ -1,0 +1,25 @@
+---
+- name: Create network
+  community.docker.docker_network:
+    name: "{{ NETname }}"
+    driver: overlay
+
+- name: api
+  vars:
+    names: "{{ item.name }}"
+    version: "{{ item.version }}"
+  include_tasks: 
+    file: "../services/{{ item.name }}/service.yml"
+    apply:
+      tags: "{{ item.name }}"
+  tags: always
+  loop: "{{ services }}"
+
+
+
+
+
+    
+
+
+    

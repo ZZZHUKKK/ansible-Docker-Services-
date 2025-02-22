@@ -1,0 +1,22 @@
+---
+- name: Deploy / build
+  hosts: deploy
+  roles:
+    - role: docker_install
+      tags: docker_install
+    - role: build
+      tags: build
+    - role: docker_swarm_config
+      tags: docker_swarm_config
+
+
+- name: Managers
+  hosts: managers
+  roles:
+    - docker_install
+
+- name: Workers
+  hosts: workers
+  roles:
+    - docker_install
+      

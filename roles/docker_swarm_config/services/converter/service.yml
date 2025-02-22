@@ -1,0 +1,16 @@
+---
+- name:  " [{{ names }} configuration of secret"
+  include_tasks: "../secret_obrabotka.yml"
+
+- name:  " [{{ names }}] deploy service"
+  block:
+    - name: "[{{ names }}]  deploy services"
+      community.docker.docker_swarm_service:
+        name: "{{ names }}"
+        image: "{{ registry }}{{ names }}:{{ version }}"
+        state: present
+        networks:
+          - name: "{{ NETname }}"
+        secrets:
+          - secret_name: "{{ names }}.env"
+            filename: "/opt/app/.env"
