@@ -19,4 +19,3 @@
   hosts: workers
   roles:
     - docker_install
-      

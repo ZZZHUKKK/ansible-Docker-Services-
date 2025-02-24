@@ -12,5 +12,3 @@
         env:
           - RABBITMQ_DEFAULT_USER= {{ rmq.user }}
           - RABBITMQ_DEFAULT_PASS= {{ rmq.password }}
-
-

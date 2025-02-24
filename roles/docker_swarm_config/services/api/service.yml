@@ -20,5 +20,3 @@
         secrets:
           - secret_name: "{{ names }}.env"
             filename: "/opt/app/.env"
-    
-  
