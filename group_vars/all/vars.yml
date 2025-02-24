@@ -36,3 +36,7 @@ non_build_serv:
 configs:
   converter:
     queue: q_imageProcessor
+
+swarm_addr: 10.11.10.1
+
+node_2_left: "STEPIKserver2"

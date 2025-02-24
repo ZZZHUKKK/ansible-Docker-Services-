@@ -1,0 +1,10 @@
+---
+- name: Add nodes
+  debug:
+    msg: "{{ hostvars['STEPIKserver1'].token_manager }}"
+
+- name: Add nodes
+  community.docker.docker_swarm:
+    state: join
+    remote_addrs: "{{ swarm_addr }}"
+    join_token: "{{ hostvars['STEPIKserver1'].token_manager if type == 'manager' else hostvars['STEPIKserver1'].token_worker }}"

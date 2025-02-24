@@ -1,0 +1,12 @@
+---
+- name: Inicialization of swarm
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ swarm_addr }}"
+  register: token
+
+- name: Set global variable with swarm token
+  set_fact:
+    token_manager: "{{ token.swarm_facts.JoinTokens.Manager }}"
+    token_worker: "{{ token.swarm_facts.JoinTokens.Worker }}"
+    cashable: true

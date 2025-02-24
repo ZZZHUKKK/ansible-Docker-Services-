@@ -6,16 +6,29 @@
       tags: docker_install
     - role: build
       tags: build
-    - role: docker_swarm_config
-      tags: docker_swarm_config
+    - role: swarm_init
+      tags: swarm_init
+    - role: deploy
+      tags: deploy
+    - role: swarm_node_leave
+      tags: swarm_node_leave
+
 
 
 - name: Managers
   hosts: managers
   roles:
-    - docker_install
+    - role: docker_install
+      tags: docker_install
+    - role: swarm_join
+      type: manager
+      tags: swarm_join
 
 - name: Workers
   hosts: workers
   roles:
-    - docker_install
+    - role: docker_install
+      tags: docker_install
+    - role: swarm_join
+      type: worker
+      tags: swarm_join

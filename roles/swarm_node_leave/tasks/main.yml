@@ -1,0 +1,22 @@
+---
+- name: Set node availability
+  community.docker.docker_node:
+    hostname: "{{ node_2_left }}"
+    availability: drain
+
+- name: Wait until no containers are running on the node
+  community.docker.docker_host_info:
+  delegate_to: "{{ node_2_left }}"
+  register: node_info
+  retries: 30
+  delay: 2
+  failed_when: false
+  until: node_info is succeeded
+      and node_info.host_info is defined
+      and node_info.host_info.ContainersRunning == 0
+
+- name: Demote STEPIKserver2 to worker
+  command: docker node demote {{ node_2_left }}
+
+- name: "Remove {{ node_2_left }}"
+  command: docker node rm {{ node_2_left }} --force
