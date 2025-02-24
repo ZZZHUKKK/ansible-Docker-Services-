@@ -3,7 +3,7 @@
   ansible.builtin.git:
     repo: 'https://github.com/ZZZHUKKK/docker_app.git'
     dest: "{{ git_folder }}"
-    version: master
+    version: app5(nginx)
 
 - name: Tag and push to docker hub
   community.docker.docker_image:

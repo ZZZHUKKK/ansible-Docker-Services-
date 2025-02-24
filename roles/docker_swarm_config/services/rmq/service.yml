@@ -5,7 +5,7 @@
     - name: "[{{ names }}]  deploy services"
       community.docker.docker_swarm_service:
         name: "{{ names }}"
-        image: "rabbitmq:3-management"
+        image: "rabbitmq:{{ version }}"
         state: present
         networks:
           - name: "{{ NETname }}"

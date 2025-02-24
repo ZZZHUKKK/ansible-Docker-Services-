@@ -4,7 +4,7 @@
     name: "{{ NETname }}"
     driver: overlay
 
-- name: api
+- name: services
   vars:
     names: "{{ item.name }}"
     version: "{{ item.version }}"

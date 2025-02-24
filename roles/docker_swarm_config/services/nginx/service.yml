@@ -1,0 +1,26 @@
+- name:  " [{{ names }}] configuration of config"
+  include_tasks: "../config_obrabotka.yml"
+  loop:
+    - nginx.conf
+  loop_control:
+    loop_var: config_item
+      
+
+- name:  " [{{ names }}] deploy service"
+  block:
+    - name: "[{{ names }}]  deploy services"
+      community.docker.docker_swarm_service:
+        name: "{{ names }}"
+        image: "nginx:{{ version }}"
+        state: present
+        force_update: true
+        networks:
+          - name: "{{ NETname }}"
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 80
+            target_port: 80
+        configs:
+          - config_name: nginx.conf
+            filename: "/etc/nginx/nginx.conf"

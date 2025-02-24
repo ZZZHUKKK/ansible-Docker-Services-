@@ -1,0 +1,17 @@
+---
+- name: "[{{ names }}] Create config"
+  community.docker.docker_config:
+    name: "{{ config_item }}"
+    data: "{{ configFile | b64encode }}"
+    labels:
+      config: "{{ configFile | hash('sha1') }}"
+    data_is_b64: true
+    state: present
+  vars:
+    configFile: "{{ lookup('template', names ~ '/{{ config_item }}.jinja2') }}"
+
+- name: "deb"
+  vars:
+    configFile: "{{ lookup('template', names ~ '/{{ config_item }}.jinja2') }}"
+  debug:
+    msg: "{{ configFile }}"
